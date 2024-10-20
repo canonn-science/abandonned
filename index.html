@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settlements</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            position: relative;
+            height: 100vh;
+            margin: 0;
+        }
+        .dropdown {
+            position: absolute;
+            top: 20%;
+            left: 6%;
+            z-index: 2; /* Ensure dropdown is above iframe */
+        }
+        .dropdown button {
+            width: 350px;
+            height: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #FFB732;
+            border: 1px solid #100;
+            border-radius: 4px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #FFB732;
+            border: 1px solid #100;
+            max-height: 540px;
+            overflow-y: auto;
+            z-index: 1;
+            width: 350px;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        .dropdown-item {
+            padding: 5px 12px;
+            cursor: pointer;
+        }
+        .dropdown-item:hover {
+            background-color: #f1f1f1;
+        }
+        h1 {
+            text-align: center;
+            color: Orange;
+            font-size: 36px;
+            margin: 0;
+            position: absolute;
+            top: 5%;
+            left: 51%;
+        }
+        /* Fixed-size iframe in viewport units */
+        #settlementIframe {
+            position: absolute;
+            top: 57%;
+            left: 75%;
+            width: 90vw; /* 70% of viewport width */
+            height: 82.5vh; /* 82.5% of viewport height */
+            border: 0;
+            transform: translate(-50%, -50%); /* Center it */
+        }
+    </style>
+</head>
+
+<body style="background-color:DimGrey">
+<h1>Abandoned Settlements</h1>
+<div class="dropdown">
+    <button id="settlementButton">Settlement:</button>
+    <div class="dropdown-content" id="settlementDropdown"></div>
+</div>
+
+<iframe id="settlementIframe" src="" title="Settlement"></iframe>
+
+<script>
+    const settlements = [
+        "Klatt Enterprises.html",
+        "Colony SNB-86.html",
+        "Betterton Outpost.html",
+        "Botanial Research Station FNA-559.html",
+        "Dixon Dock.html",
+        "Ameida Landing.html",
+        "Carmichael Point.html",
+        "Jackson Enterprise.html",
+        "Mayes Chemical Plant.html",
+        "Stack.html",
+        "Stuart Retreat.html",
+        "Dav’s Hope.html",
+        "Orion’s Folly.html",
+        "Taylor Keep.html",
+        "Hogan Depot.html",
+        "Vardey Prospecting - The Trial.html",
+        "Goddard Mill - The Trial.html",
+        "Downey’s Junkyard - The Trial.html",
+        "Crowther’s Rest.html",
+        "The Sanctum.html",
+        "The Prophet.html",
+        "Iraxon Lane.html",
+        "Hollis Gateway.html",
+        "Gregorys Rest.html",
+	"Research Facility 5592.html",
+	"Communication Array Delta 69.html",
+        "Velasquez Medical Research Centre.html",
+	"Serene Harbour.html",
+	"Exploration Camp C-NO4.html",
+        "The Church Of The Path.html"
+    ];
+
+    settlements.sort();
+
+    const dropdown = document.getElementById('settlementDropdown');
+
+    settlements.forEach((settlement, index) => {
+        const item = document.createElement('div');
+        item.className = 'dropdown-item';
+        item.dataset.value = `HTML/${settlement}`;
+        item.textContent = `${index + 1}. ${settlement.replace('.html', '')}`;
+        item.onclick = () => {
+            const iframe = document.getElementById('settlementIframe');
+            iframe.src = item.dataset.value;
+            document.getElementById('settlementButton').textContent = item.textContent;
+        };
+        dropdown.appendChild(item);
+    });
+</script>
+
+</body>
+</html>
+
+
