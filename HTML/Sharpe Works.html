@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Wheelzoom</title>
+    <style>
+        .image-container {
+	    position: absolute;
+            top: 0%;
+            left: 0%;
+            width: 70%;
+            height: auto;
+        }
+        .zoom {
+            display: block; /* Removes default margins */
+        }
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* Ignores mouse events for the second image */
+        }
+    </style>
+</head>
+<body>
+    <div class="image-container">
+        <img class="zoom" src="..\webp\Sharpe Works(0).webp" alt="zoom" width="100%" height="auto"/>
+        <img class="overlay" src="..\webp\Sharpe Works(1).webp" alt="Overlay" />
+    </div>
+    
+    <script src="wheelzoom.js"></script>
+    <script>
+        wheelzoom(document.querySelectorAll('.zoom'), { zoom: 0.1 });
+    </script>
+</body>
+</html>
+
+
+
+
+
