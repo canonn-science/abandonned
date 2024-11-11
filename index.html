@@ -5,33 +5,39 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Settlements</title>
     <style>
+        html {
+            height: 100%;
+        }
         body {
             font-family: Arial, sans-serif;
             position: relative;
-            height: 100vh;
+            min-height: 100%;
             margin: 0;
         }
         .dropdown {
             position: absolute;
-            top: 20%;
-            left: 6%;
-            z-index: 2; /* Ensure dropdown is above iframe */
+            top: 10%;
+            left: 5%;
+            z-index: 2;
         }
         .dropdown button {
             width: 350px;
-            height: 50px;
+            height: 35px;
             font-size: 16px;
             cursor: pointer;
-            background-color: #FFB732;
+            background-color: transparent;
             border: 1px solid #100;
             border-radius: 4px;
+        }
+        button:hover {
+            background-color: #FFB732;
         }
         .dropdown-content {
             display: none;
             position: absolute;
             background-color: #FFB732;
             border: 1px solid #100;
-            max-height: 540px;
+            max-height: 640px;
             overflow-y: auto;
             z-index: 1;
             width: 350px;
@@ -50,30 +56,56 @@
             text-align: center;
             color: Orange;
             font-size: 36px;
-            margin: 0;
-            position: absolute;
             top: 5%;
-            left: 51%;
         }
-        /* Fixed-size iframe in viewport units */
+        h2 {
+            text-align: center;
+            color: Orange;
+            font-size: 18px;
+            position: relative;
+            top: -2%;
+        }
         #settlementIframe {
             position: absolute;
-            top: 57%;
-            left: 75%;
-            width: 90vw; /* 70% of viewport width */
-            height: 82.5vh; /* 82.5% of viewport height */
+            top: 18%;
+            left: 50%;
+            transform: translateX(-35%);
+            width: 90vw;
+            height: 82.5vh;
             border: 0;
-            transform: translate(-50%, -50%); /* Center it */
+        }
+        #settlementNavButton {
+            position: absolute;
+            top: 10%;
+            right: 5%;
+            min-width: 350px;
+            height: 35px;
+            background-color: transparent;
+            border: 1px solid #100;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 4px;
+            z-index: 2;
+        }
+        #settlementNavButton:hover {
+            background-color: #FFB732;
         }
     </style>
 </head>
 
 <body style="background-color:DimGrey">
-<h1>Abandoned Settlements</h1>
+
+<h1>Abandoned Settlements HiRes Maps</h1>
+<h2>(Scroll to zoom)</h2>
+
 <div class="dropdown">
     <button id="settlementButton">Settlement:</button>
     <div class="dropdown-content" id="settlementDropdown"></div>
 </div>
+
+<button id="settlementNavButton" onclick="openInNewTab();">
+    View on Canonn website:
+</button>
 
 <iframe id="settlementIframe" src="" title="Settlement"></iframe>
 
@@ -82,9 +114,9 @@
         "Klatt Enterprises.html",
         "Colony SNB-86.html",
         "Betterton Outpost.html",
-        "Botanial Research Station FNA-559.html",
+        "Botanical Research Station FNA-559.html",
         "Dixon Dock.html",
-        "Ameida Landing.html",
+        "Almeida Landing.html",
         "Carmichael Point.html",
         "Jackson Enterprise.html",
         "Mayes Chemical Plant.html",
@@ -103,60 +135,101 @@
         "Iraxon Lane.html",
         "Hollis Gateway.html",
         "Gregorys Rest.html",
-	"Research Facility 5592.html",
-	"Communication Array Delta 69.html",
+        "Research Facility 5592.html",
+        "Communication Array Delta 69.html",
         "Velasquez Medical Research Centre.html",
-	"Serene Harbour.html",
-	"Exploration Camp C-NO4.html",
+        "Serene Harbour.html",
+        "Exploration Camp C-NO4.html",
         "The Church Of The Path.html",
-	"Site 426.html",
-	"Planet Dave Outpost.html",
-	"Quarantine Site UC-001.html",
-	"Site 16.html",
-	"Medical Research Base BJI-86.html",
-	"Extraction Site HS-98.html",
-	"Medical Research Base MIR-14.html",
-	"Lookout Military Test Facility.html",
-	"Exploration Camp JSPR-003.html",
-	"Exploration Camp JSPR-003_2.html",
-	"Columbus Expedition Camp 14.html",
-	"Holloway Bioscience Research Facility 15.html",
-	"Herpin Research Base.html",
-	"Site 94.html",
-	"Research Base LV 87.html",
-	"Penal Colony BV-2259.html",
-	"Comms Facility 89563.html",
-	"Dominic’s Corner.html",
-	"Research Base KG-3362.html",
-	"Scrump Landing.html",
-	"Sharpe Works.html",
-	"Rawat Depot.html",
-	"Rawat Depot (PAN).html",
-	"Fort Asch.html",
-	"Extraction Site V-81.html",
-	"Oaken Point.html",
-	"Geological Survey 23B.html"
+        "Site 426.html",
+        "Planet Dave Outpost.html",
+        "Quarantine Site UC-001.html",
+        "Site 16.html",
+        "Medical Research Base BJI-86.html",
+        "Extraction Site HS-98.html",
+        "Medical Research Base MIR-14.html",
+        "Lookout Military Test Facility.html",
+        "Exploration Camp JSPR-003.html",
+        "Exploration Camp JSPR-003-2.html",
+        "Columbus Expedition Camp 14.html",
+        "Holloway Bioscience Research Facility 15.html",
+        "Herpin Research Base.html",
+        "Site 94.html",
+        "Research Base LV 87.html",
+        "Penal Colony BV-2259.html",
+        "Comms Facility 89563.html",
+        "Dominic’s Corner.html",
+        "Research Base KG-3362.html",
+        "Scrump Landing.html",
+        "Sharpe Works.html",
+        "Rawat Depot.html",
+        "Rawat Depot (PAN).html",
+        "Fort Asch.html",
+        "Extraction Site V-81.html",
+        "Oaken Point.html",
+        "Geological Survey 23B.html",
+        "Hawkins Gap Alpha Site.html",
+        "Hawkins Gap Beta Site.html",
+        "Hawkins Gap Delta Site.html",
+        "Hawkins Gap Gamma Site.html",
+        "Conflux Alpha Site.html",
+        "Conflux Beta Site.html",
+        "Conflux Delta Site.html",
+        "Conflux Gamma Site.html",
+        "Formidine Rift Alpha Site.html",
+        "Formidine Rift Beta Site.html",
+        "Formidine Rift Delta Site.html",
+        "Formidine Rift Gamma Site.html"
     ];
 
     settlements.sort();
 
     const dropdown = document.getElementById('settlementDropdown');
+    let currentSettlementLink = ''; // This will store the link for the button
 
-    settlements.forEach((settlement, index) => {
+    settlements.forEach((settlement) => {
+        const settlementName = settlement.replace('.html', ''); // Remove the ".html" extension
+        const sanitizedNameForMenu = settlementName;
+
         const item = document.createElement('div');
         item.className = 'dropdown-item';
         item.dataset.value = `HTML/${settlement}`;
-        item.textContent = `${index + 1}. ${settlement.replace('.html', '')}`;
+        item.textContent = sanitizedNameForMenu; // Name displayed in the dropdown menu
+
         item.onclick = () => {
             const iframe = document.getElementById('settlementIframe');
             iframe.src = item.dataset.value;
-            document.getElementById('settlementButton').textContent = item.textContent;
+            document.getElementById('settlementButton').textContent = "Settlement:";
+			document.getElementById('settlementNavButton').textContent = `View on Canonn website: ${sanitizedNameForMenu}`; // Update the right-top button and link
+
+            let sanitizedNameForLink = sanitizedNameForMenu.replace(/\s+/g, '-'); // Replace spaces with hyphens
+            sanitizedNameForLink = sanitizedNameForLink.replace(/(\(PAN\)|['’])/g, ''); // Remove "(PAN)"
+
+            if (sanitizedNameForMenu.toLowerCase().includes("the trial")) {
+                sanitizedNameForLink = "the-trial"; // Replace settlement name with "the-trial"
+            }
+            if ((sanitizedNameForMenu.toLowerCase().includes("prophet")) || (sanitizedNameForMenu.toLowerCase().includes("sanctum"))) {
+                sanitizedNameForLink = "the-sanctum-the-prophet"; // Replace settlement name with "the-sanctum-the-prophet"
+            }
+
+            currentSettlementLink = `https://canonn.science/codex/${sanitizedNameForLink}/`; // Construct the link
         };
         dropdown.appendChild(item);
     });
+    function openInNewTab() {
+        window.open(currentSettlementLink, '_blank'); // Opens the link in a new tab
+    }
 </script>
-
 </body>
 </html>
+
+
+
+
+
+
+
+
+
 
 
